@@ -388,19 +388,149 @@ FAIL {"code": 500,"message":"FAIL"}
 이벤트 요청
 -
 ```
-POST/uploadRequest
+POST/event/uploadRequest
 ```
  - Request
 ```
 {
     eventTitle: String,
-    file: String,
-    content: String
+    "image": String,
+    "summary": String,
+    content: String,
+    startDate: String,
+    endDate: String
 }
 ```
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success"}
+```
+```
+FAIL {"code": 500,"message":"FAIL"}
+```
+이벤트 올리기
+-
+```
+POST/event/addEvent
+```
+ - Request
+```
+{
+    _id: String,
+    accept: Boolean
+}
+```
+- Response
+```
+SUCCESS {"code": 200, "message": "Success",events:{[
+    "eventTitle": String,
+    "image": String,
+    "summary": String,
+    "content": String,
+    "startDate": String,
+    "endDate": String
+]}}
+```
+```
+FAIL {"code": 500,"message":"FAIL"}
+```
+이벤트 수정
+-
+```
+PUT/event/updateEvent/{_id}
+```
+ - Request
+```
+{
+    eventTitle: String,
+    image: String,
+    content: String,
+    startDate: String,
+    endDate: String
+}
+```
+- Response
+```
+SUCCESS {"code": 200, "message": "Success",events:{[
+    eventTitle: String,
+    image: String,
+    content: String,
+    startDate: String,
+    endDate: String
+]}}
+```
+```
+FAIL {"code": 500,"message":"FAIL"}
+```
+이벤트 삭제
+-
+```
+DELETE/event/deleteEvent/{_id}
+```
+ - Request
+```
+{
+    
+}
+```
+- Response
+```
+SUCCESS {"code": 200, "message": "Success",events:{[
+    eventTitle: String,
+    image: String,
+    content: String,
+    startDate: String,
+    endDate: String
+]}}
+```
+```
+FAIL {"code": 500,"message":"FAIL"}
+```
+이벤트 보기
+-
+```
+GET/event/
+```
+ - Request
+```
+{
+    
+}
+```
+- Response
+```
+SUCCESS {"code": 200, "message": "Success",events:{[
+    eventTitle: String,
+    image: String,
+    "summary": String,
+    startDate: String,
+    endDate: String
+]}}
+```
+```
+FAIL {"code": 500,"message":"FAIL"}
+```
+이벤트 상세보기
+-
+```
+GET/event/{_id}
+```
+ - Request
+```
+{
+    
+}
+```
+- Response
+```
+SUCCESS {"code": 200, "message": "Success",events:{
+    eventTitle: String,
+    image: String,
+    "summary": String,
+    "content": String,
+    startDate: String,
+    endDate: String
+}}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
