@@ -52,7 +52,10 @@ POST/auth/login
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",{
-    "isAdmin": Boolean,
+    "user": {
+        "id": String,
+        "isAdmin": Boolean
+    },
     "token": String
     }}
 ```
@@ -304,9 +307,9 @@ PUT/timetable/updateTimetable
 ```
 SUCCESS {"code": 200, "message": "Success", "timetable":{
     "grade": [{
-        class:[{
-            dayOfWeek:[{
-                subject:[{
+        "class":[{
+            "dayOfWeek":[{
+                "subject":[{
                     String
                 }]
             }]
@@ -332,15 +335,34 @@ GET/timetable/
 ```
 SUCCESS {"code": 200, "message": "Success", "timetable":"timetable":{
     "grade": [{
-        class:[{
-            dayOfWeek:[{
-                subject:[{
+        "class":[{
+            "dayOfWeek":[{
+                "subject":[{
                     String
                 }]
             }]
         }]
     }]
 }}}
+```
+```
+FAIL {"code": 500,"message":"FAIL"}
+```
+메세지 받기
+-
+```
+POST/message
+```
+ - Request
+```
+{
+   "messageTitle": String,
+   "id": String
+}
+```
+- Response
+```
+SUCCESS {"code": 200, "message": "Success"}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -393,12 +415,12 @@ POST/event/uploadRequest
  - Request
 ```
 {
-    eventTitle: String,
+    "eventTitle": String,
     "image": String,
     "summary": String,
-    content: String,
-    startDate: String,
-    endDate: String
+    "content": String,
+    "startDate": String,
+    "endDate": String
 }
 ```
 - Response
@@ -416,8 +438,8 @@ POST/event/addEvent
  - Request
 ```
 {
-    _id: String,
-    accept: Boolean
+    "_id": String,
+    "accept": Boolean
 }
 ```
 - Response
@@ -442,21 +464,23 @@ PUT/event/updateEvent/{_id}
  - Request
 ```
 {
-    eventTitle: String,
-    image: String,
-    content: String,
-    startDate: String,
-    endDate: String
+    "eventTitle": String,
+    "image": String,
+    "summary": String,
+    "content": String,
+    "startDate": String,
+    "endDate": String
 }
 ```
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{[
-    eventTitle: String,
-    image: String,
-    content: String,
-    startDate: String,
-    endDate: String
+    "eventTitle": String,
+    "image": String,
+    "summary": String,
+    "content": String,
+    "startDate": String,
+    "endDate": String
 ]}}
 ```
 ```
@@ -476,11 +500,11 @@ DELETE/event/deleteEvent/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{[
-    eventTitle: String,
-    image: String,
-    content: String,
-    startDate: String,
-    endDate: String
+    "eventTitle": String,
+    "image": String,
+    "summary": String,
+    "startDate": String,
+    "endDate": String
 ]}}
 ```
 ```
@@ -500,11 +524,11 @@ GET/event/
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{[
-    eventTitle: String,
-    image: String,
+    "eventTitle": String,
+    "image": String,
     "summary": String,
-    startDate: String,
-    endDate: String
+    "startDate": String,
+    "endDate": String
 ]}}
 ```
 ```
@@ -524,12 +548,12 @@ GET/event/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{
-    eventTitle: String,
-    image: String,
+    "eventTitle": String,
+    "image": String,
     "summary": String,
     "content": String,
-    startDate: String,
-    endDate: String
+    "startDate": String,
+    "endDate": String
 }}
 ```
 ```
@@ -585,8 +609,8 @@ GET/group/
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success","groups":[{
-    groupTitle: String,
-    _id: String
+    "groupTitle": String,
+    "_id": String
 }]}
 ```
 ```
@@ -606,12 +630,12 @@ POST/group/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success","group":{
-    groupTitle: String,
-    members:[{
+    "groupTitle": String,
+    "members":[{
         "id": String,
         "rightNumber":Number
     }],
-    notices:[{
+    "notices":[{
         "title": String,
         "information": String,
         "startDate": String,
