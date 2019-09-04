@@ -83,7 +83,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 추가
 -
 ```
-POST/schedule/addSchedule
+POST/calendar/addSchedule/{_id}
 ```
  - Request
 ```
@@ -108,7 +108,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 수정
 -
 ```
-PUT/schedule/updateSchedule/{_id}
+PUT/calendar/updateSchedule/{_id}
 ```
  - Request
 ```
@@ -134,7 +134,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 보기
 -
 ```
-GET/schedule/
+GET/calendar/
 ```
  - Request
 ```
@@ -156,7 +156,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 상세보기
 -
 ```
-GET/schedule/{_id}
+GET/calendar/{_id}
 ```
  - Request
 ```
@@ -177,7 +177,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 삭제
 -
 ```
-DELETE/schedule/deleteSchedule/{_id}
+DELETE/calendar/deleteSchedule/{_id}
 ```
  - Request
 ```
@@ -351,25 +351,6 @@ FAIL {"code": 500,"message":"FAIL"}
 메세지 받기
 -
 ```
-POST/message
-```
- - Request
-```
-{
-   "messageTitle": String,
-   "id": String
-}
-```
-- Response
-```
-SUCCESS {"code": 200, "message": "Success"}
-```
-```
-FAIL {"code": 500,"message":"FAIL"}
-```
-메세지 받기
--
-```
 GET/message
 ```
  - Request
@@ -381,7 +362,8 @@ GET/message
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "messages":[{
-    "messageTitle": String
+    "message": String,
+    "needDialogue": Boolean
 }]}
 ```
 ```
@@ -401,7 +383,7 @@ DELETE/message/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "messages":[{
-    "messageTitle": String
+    "message": String
 }]}
 ```
 ```
@@ -635,18 +617,13 @@ SUCCESS {"code": 200, "message": "Success","group":{
         "id": String,
         "rightNumber":Number
     }],
-    "notices":[{
-        "title": String,
-        "information": String,
-        "startDate": String,
-        "endDate": String
-    }]
+    "calendarId": String
 }}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
 ```
-그룹 수락
+그룹 수락,거절
 -
 ```
 POST/group/enterGroup
@@ -654,7 +631,7 @@ POST/group/enterGroup
  - Request
 ```
 {
-    "_id": String
+    "accept": Boolean
 }
 ```
 - Response
