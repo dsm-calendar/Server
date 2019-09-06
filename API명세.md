@@ -641,7 +641,6 @@ SUCCESS {"code": 200, "message": "Success"}
 ```
 FAIL {"code": 500,"message":"FAIL"}
 ```
-
 권한 수정
 -
 ```
