@@ -1,12 +1,12 @@
-User
+Student
 =
 ```
 {
-    id: VARCHAR() PRIMART_KEY,
-    pw: VARCHAR(),
-    classOf: SMALLINT,
-    isAdmin: TINYINT(1),
-    myCalendarId: VARCHAR(),
+    id: VARCHAR(30) PRIMARY KEY,
+    pw: VARCHAR(30),
+    classOf: INT,
+    myCalendarId: VARCHAR(40),
+    iconIndex: INT
 }
 ```
 
@@ -14,9 +14,9 @@ Message
 =
 ```
 {
-    id: VARCHAR() PRIMART_KEY,
-    index: INT PRIMART_KEY,
-    message: VARCHAR(),
+    messageId: VARCHAR() PRIMARY KEY,
+    userId: VARCHAR(),
+    messageText: VARCHAR(),
     haveDialogue: TINYINT(1)
 }
 ```
@@ -25,7 +25,7 @@ Calendar
 =
 ```
 {
-    calendarId: VARCHAR() PRIMART_KEY
+    calendarId: INT() PRIMARY KEY
 }
 ```
 
@@ -33,12 +33,12 @@ Schedule
 =
 ```
 {
-    calendarId: VARCHAR() PRIMART_KEY,
-    id: VARCHAR()  PRIMART_KEY,
+    calendarId: VARCHAR(),
+    scheduleId: VARCHAR() PRIMARY KEY,
     title: VARCHAR(),
     information: VARCHAR(),
-    startDate: Date,
-    endDate: Date
+    startDate: VARCHAR(),
+    endDate: VARCHAR()
 }
 ```
 
@@ -46,8 +46,8 @@ Group
 =
 ```
 {
-    groupId: VARCHAR() PRIMART_KEY,
-    groupTitle: VARCHAR(),
+    groupId: VARCHAR() PRIMARY KEY,
+    groupName: VARCHAR(),
     calendarId: VARCHAR()
 }
 ```
@@ -56,8 +56,9 @@ GroupMember
 =
 ```
 {
-    groupId: VARCHAR() PRIMART_KEY,
-    id: VARCHAR() PRIMART_KEY,
+    groupId: VARCHAR() PRIMARY KEY,
+    memberRight: INT,
+    userId: VARCHAR(30)
     rightNumber: TINYINT(2)
 }
 ```
@@ -66,8 +67,8 @@ InvitedMember
 =
 ```
 {
-    groupId: VARCHAR() PRIMART_KEY,
-    id: VARCHAR() PRIMART_KEY
+    groupId: VARCHAR() PRIMARY KEY,
+    userId: VARCHAR()
 }
 ```
 
@@ -75,7 +76,7 @@ Event
 =
 ```
 {
-    id : VARCHAR() PRIMART_KEY
+    evnetId : VARCHAR() PRIMARY KEY,
     eventTitle: VARCHAR(),
     image: VARCHAR(),
     summary: VARCHAR(),
@@ -89,7 +90,7 @@ Notice
 =
 ```
 {
-    id : VARCHAR() PRIMART_KEY,
+    noticeId : VARCHAR() PRIMARY KEY,
     title: VARCHAR(),
     content: VARCHAR(),
     startDate: DATE,
@@ -101,15 +102,7 @@ Timetable
 =
 ```
 {
-    id : SMALLINT PRIMART_KEY,
+    index : INT PRIMARY KEY,
     subject : VARCHAR(25)
-}
-```
-
-AccessCode
-=
-```
-{
-    accessCode: VARCHAR() PRIMART_KEY
 }
 ```

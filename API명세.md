@@ -21,22 +21,6 @@ POST/auth/resister
     ```
     FAIL {"code": 500,"message":"FAIL"}
     ```
-- TEACHER
-    - Request
-    ```
-    {
-        "id": String,
-        "pw": String,
-        "accessCode": String
-    }
-    ```
-    - Response
-    ```
-    SUCCESS {"code": 200, "message": "Success"}
-    ```
-    ```
-    FAIL {"code": 500,"message":"FAIL"}
-    ```
 로그인
 -
 ```
@@ -51,18 +35,14 @@ POST/auth/login
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success",{
-    "user": {
-        "id": String,
-        "isAdmin": Boolean
-    },
-    "token": String
+SUCCESS {"code": 200, {
+    id: String,
+    userNum: INT
     }}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
 ```
-인증코드 전송
 -
 ```
 POST/user/accessCode
@@ -83,7 +63,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 추가
 -
 ```
-POST/calendar/addSchedule/{_id}
+POST/calendar/addSchedule/{calendarId}
 ```
  - Request
 ```
@@ -97,6 +77,7 @@ POST/calendar/addSchedule/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "schedules":[{
+    "scheduleId": Int,
     "title": String,
     "startDate": String,
     "endDate": String
@@ -108,7 +89,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 수정
 -
 ```
-PUT/calendar/updateSchedule/{_id}
+PUT/calendar/updateSchedule/{calendarId}
 ```
  - Request
 ```
@@ -122,6 +103,7 @@ PUT/calendar/updateSchedule/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "schedule":{
+    "calendarId": Int
     "title": String,
     "information": String,
     "startDate": String,
@@ -134,7 +116,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 보기
 -
 ```
-GET/calendar/
+GET/calendar/{calendarId}
 ```
  - Request
 ```
@@ -145,6 +127,7 @@ GET/calendar/
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "schedules":[{
+    "scheduleId":Int,
     "title": String,
     "startDate": String,
     "endDate": String
@@ -156,7 +139,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 상세보기
 -
 ```
-GET/calendar/{_id}
+GET/calendar/{scheduleId}
 ```
  - Request
 ```
@@ -177,7 +160,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 삭제
 -
 ```
-DELETE/calendar/deleteSchedule/{_id}
+DELETE/calendar/deleteSchedule/{scheduleId}
 ```
  - Request
 ```
@@ -187,12 +170,7 @@ DELETE/calendar/deleteSchedule/{_id}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "schedules":[{
-    "title": String,
-    "information": String,
-    "startDate": String,
-    "endDate": String
-}]}
+SUCCESS {"code": 200, "message": "Success"}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -214,6 +192,7 @@ POST/notice/addNotice
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "notices":[{
+    "noticeId": Int,
     "title": String,
     "startDate": String,
     "endDate": String
@@ -236,6 +215,7 @@ POST/notice/
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "notices":[{
+    "noticeId": Int,
     "title": String,
     "startDate": String,
     "endDate": String
@@ -247,7 +227,7 @@ FAIL {"code": 500,"message":"FAIL"}
 공지사항 상세보기
 -
 ```
-GET/notice/{_id}
+GET/notice/{noticeId}
 ```
  - Request
 ```
@@ -270,7 +250,7 @@ FAIL {"code": 500,"message":"FAIL"}
 공지사항 삭제
 -
 ```
-DELETE/notice/delete/{_id}
+DELETE/notice/delete/{noticeId}
 ```
  - Request
 ```
@@ -280,11 +260,7 @@ DELETE/notice/delete/{_id}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "notices":[{
-    "title": String,
-    "startDate": String,
-    "endDate": String
-}]}
+SUCCESS {"code": 200, "message": "Success"}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -297,25 +273,16 @@ PUT/timetable/updateTimetable
  - Request
 ```
 {
-    "grade": Number,
-    "class": Number,
-    "order": Number,
+    "index": Int,
     "subject": String
 }
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "timetable":{
-    "grade": [{
-        "class":[{
-            "dayOfWeek":[{
-                "subject":[{
-                    String
-                }]
-            }]
-        }]
-    }]
-}}
+SUCCESS {"code": 200, "message": "Success", "timetables":[{
+    "index": Int,
+    "subject": String
+}]}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -333,17 +300,10 @@ GET/timetable/
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "timetable":"timetable":{
-    "grade": [{
-        "class":[{
-            "dayOfWeek":[{
-                "subject":[{
-                    String
-                }]
-            }]
-        }]
-    }]
-}}}
+SUCCESS {"code": 200, "message": "Success", "timetables":[{
+    "index": Int,
+    "subject": String
+}]}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -362,7 +322,8 @@ GET/message
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success", "messages":[{
-    "message": String,
+    "messageId": Int,
+    "messageText": String,
     "needDialogue": Boolean
 }]}
 ```
@@ -372,7 +333,7 @@ FAIL {"code": 500,"message":"FAIL"}
 메세지 삭제
 -
 ```
-DELETE/message/{_id}
+DELETE/message/{messageId}
 ```
  - Request
 ```
@@ -382,9 +343,7 @@ DELETE/message/{_id}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "messages":[{
-    "message": String
-}]}
+SUCCESS {"code": 200, "message": "Success"}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -420,13 +379,14 @@ POST/event/addEvent
  - Request
 ```
 {
-    "_id": String,
+    "EventId": String,
     "accept": Boolean
 }
 ```
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{[
+    "EventId": Int,
     "eventTitle": String,
     "image": String,
     "summary": String,
@@ -441,7 +401,7 @@ FAIL {"code": 500,"message":"FAIL"}
 이벤트 수정
 -
 ```
-PUT/event/updateEvent/{_id}
+PUT/event/updateEvent/{EventId}
 ```
  - Request
 ```
@@ -457,6 +417,7 @@ PUT/event/updateEvent/{_id}
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{[
+    "EventId": Int,
     "eventTitle": String,
     "image": String,
     "summary": String,
@@ -471,7 +432,7 @@ FAIL {"code": 500,"message":"FAIL"}
 이벤트 삭제
 -
 ```
-DELETE/event/deleteEvent/{_id}
+DELETE/event/deleteEvent/{EventId}
 ```
  - Request
 ```
@@ -481,13 +442,7 @@ DELETE/event/deleteEvent/{_id}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success",events:{[
-    "eventTitle": String,
-    "image": String,
-    "summary": String,
-    "startDate": String,
-    "endDate": String
-]}}
+SUCCESS {"code": 200, "message": "Success"}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -506,6 +461,7 @@ GET/event/
 - Response
 ```
 SUCCESS {"code": 200, "message": "Success",events:{[
+    "EventId": Int,
     "eventTitle": String,
     "image": String,
     "summary": String,
@@ -519,7 +475,7 @@ FAIL {"code": 500,"message":"FAIL"}
 이벤트 상세보기
 -
 ```
-GET/event/{_id}
+GET/event/{EventId}
 ```
  - Request
 ```
@@ -562,12 +518,12 @@ FAIL {"code": 500,"message":"FAIL"}
 그룹 초대
 -
 ```
-POST/group/inviteMembers/{_id}
+POST/group/inviteMembers/{GroupId}
 ```
  - Request
 ```
 {
-    "members": [String]
+    "invitedMembers": [String]
 }
 ```
 - Response
@@ -592,7 +548,7 @@ GET/group/
 ```
 SUCCESS {"code": 200, "message": "Success","groups":[{
     "groupTitle": String,
-    "_id": String
+    "GroupId": String
 }]}
 ```
 ```
@@ -613,10 +569,6 @@ POST/group/{_id}
 ```
 SUCCESS {"code": 200, "message": "Success","group":{
     "groupTitle": String,
-    "members":[{
-        "id": String,
-        "rightNumber":Number
-    }],
     "calendarId": String
 }}
 ```
