@@ -14,7 +14,7 @@ public class Notice {
     String noticeContent;
     String startDate;
     String endDate;
-
+    String noticeTitle;
     public Integer getNoticeId() {
         return noticeId;
     }
@@ -30,4 +30,16 @@ public class Notice {
     public String getEndDate() {
         return endDate;
     }
+
+    public String getNoticeTitle() {
+        return noticeTitle;
+    }
+
+    public void setNotice(String noticeContent, String startDate, String endDate, String noticeTitle){
+        this.noticeContent = noticeContent;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.noticeTitle = noticeTitle;
+    }
+
 }
