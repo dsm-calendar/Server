@@ -17,11 +17,15 @@ public class Calendar {
         return calendarId;
     }
 
-    public Calendar() {
-
+    public Calendar(String category) {
+        this.category = category;
     }
 
     public String getCategory() {
         return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
