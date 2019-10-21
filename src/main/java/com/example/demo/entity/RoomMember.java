@@ -14,9 +14,20 @@ public class RoomMember {
 
     String userId;
     Integer roomId;
+    int memberRight;
 
     public Integer getMemberId() {
         return memberId;
+    }
+
+    public RoomMember(String userId, Integer roomId, int memberRight) {
+        this.userId = userId;
+        this.roomId = roomId;
+        this.memberRight = memberRight;
+    }
+
+    public int getMemberRight() {
+        return memberRight;
     }
 
     public String getUserId() {
