@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "loginuser")
 public class LoginUser {
 
     String userId;
@@ -21,5 +23,8 @@ public class LoginUser {
 
     public String getUserId() {
         return userId;
+    }
+
+    public LoginUser() {
     }
 }

@@ -14,8 +14,9 @@ public class InvitedMember {
     String userId;
     Integer roomId;
 
-    public Integer getInvitedUserId() {
-        return invitedUserId;
+    public InvitedMember(String userId, Integer roomId) {
+        this.userId = userId;
+        this.roomId = roomId;
     }
 
     public String getUserId() {
@@ -24,5 +25,8 @@ public class InvitedMember {
 
     public Integer getRoomId() {
         return roomId;
+    }
+
+    public InvitedMember() {
     }
 }

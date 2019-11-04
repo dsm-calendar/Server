@@ -11,8 +11,16 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer roomId;
 
+    public void setCalendarId(Integer calendarId) {
+        this.calendarId = calendarId;
+    }
+
     int iconIndex;
     Integer calendarId;
+    String roomTitle;
+    public String getRoomTitle() {
+        return roomTitle;
+    }
 
     public Integer getRoomId() {
         return roomId;
@@ -24,5 +32,14 @@ public class Room {
 
     public Integer getCalendarId() {
         return calendarId;
+    }
+
+    public Room(int iconIndex, Integer calendarId, String roomTitle) {
+        this.iconIndex = iconIndex;
+        this.calendarId = calendarId;
+        this.roomTitle = roomTitle;
+    }
+
+    public Room() {
     }
 }

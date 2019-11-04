@@ -37,4 +37,11 @@ public class RoomMember {
     public Integer getRoomId() {
         return roomId;
     }
+
+    public void setMemberRight(int memberRight) {
+        this.memberRight = memberRight;
+    }
+
+    public RoomMember() {
+    }
 }

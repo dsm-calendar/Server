@@ -18,4 +18,7 @@ public class Admin {
     public String getPw() {
         return pw;
     }
+
+    public Admin() {
+    }
 }

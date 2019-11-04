@@ -8,13 +8,13 @@ import javax.persistence.Table;
 @Table(name = "student")
 public class Student {
 
-    @Id
-    String id;
-    String pw;
+        @Id
+        String id;
+        String pw;
 
-    int classOf;
-    int iconIndex;
-    Integer myCalendarId;
+        int classOf;
+        int iconIndex;
+        Integer myCalendarId;
 
     public Integer getMyCalendarId() {
         return myCalendarId;
@@ -42,4 +42,11 @@ public class Student {
 
     public String getPw(){return this.pw;}
     public String getId(){return this.id;}
+
+    public void setStudent(Student student) {
+        this.id = student.getId();
+        this.pw = student.getPw();
+        this.classOf = student.getClassOf();
+        this.iconIndex = student.getIconIndex();
+    }
 }
