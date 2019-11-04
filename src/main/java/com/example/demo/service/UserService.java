@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Calendar;
-import com.example.demo.entity.LoginUser;
-import com.example.demo.entity.Student;
+import com.example.demo.entity.*;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.NotPwException;
 import com.example.demo.exception.UserIsExistsException;
@@ -36,19 +34,24 @@ public class UserService {
         return "Success logout";
     }
 
-    public LoginUser loginUser(Student student, UserRepository userRepository, LoginUserRepository loginUserRepository, AdminRepository adminRepository, LoginUserRepository loginUserRepository1) {
+    public UserInfo loginUser(Student student, UserRepository userRepository, LoginUserRepository loginUserRepository, AdminRepository adminRepository, LoginUserRepository loginUserRepository1) {
         Optional<Student> u = userRepository.findById(student.getId());
         if(!u.isPresent()){
-            if(!adminRepository.findById(student.getId()).isPresent())
+            Optional<Admin> admin = adminRepository.findById(student.getId());
+            if(!admin.isPresent())
                 throw new NotFoundException("user not exists");
+            LoginUser loginUser = loginUserRepository.save(new LoginUser(admin.get().getId()));
+            UserInfo userInfo = new UserInfo(loginUser.getUserId(),0,0,0,loginUser.getLoginUserId(),true);
+            return userInfo;
         }
 
         if(!u.get().getPw().equals(student.getPw())){
             //pw not true
             throw  new NotPwException("it is not pw");
         }
-
-        return loginUserRepository.save(new LoginUser(u.get().getId()));
+        LoginUser loginUser = loginUserRepository.save(new LoginUser(u.get().getId()));
+        UserInfo userInfo = new UserInfo(loginUser.getUserId(),u.get().getClassOf(),u.get().getIconIndex(),u.get().getMyCalendarId(),loginUser.getLoginUserId(),false);
+        return userInfo;
     }
 
 }
