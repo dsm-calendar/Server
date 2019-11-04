@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.LoginUser;
-import com.example.demo.entity.Student;
+import com.example.demo.entity.*;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.CalendarRepository;
 import com.example.demo.repository.LoginUserRepository;
@@ -40,12 +39,12 @@ public class UserController {
         return "OK";
     }
     @PostMapping(value = "/loginUser")
-    public LoginUser loginUserRequest(@RequestBody Student student){
+    public UserInfo loginUserRequest(@RequestBody Student student){
         return userService.loginUser(student, userRepository,loginUserRepository,adminRepository,loginUserRepository);
     }
     @GetMapping(value = "/logout")
     public void logoutRequest(@RequestHeader Integer loginUserId){
-        certifiedService.isLogin(loginUserId,loginUserRepository);
+        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
         userService.logout(loginUserId,loginUserRepository);
     }
 }
