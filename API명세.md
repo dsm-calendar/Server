@@ -11,7 +11,7 @@ POST/auth/resister
     {
         "id": String,
         "pw": String,
-        "classOf": Number
+        "classOf": Int
     }
     ```
     - Response
@@ -36,30 +36,17 @@ POST/auth/login
 - Response
 ```
 SUCCESS {"code": 200, {
-    id: String,
-    userNum: INT
+     classOf: Int,
+     iconIndex: Int,
+     id: String,
+     loginUserId: Integer,
+     myCalendarId: Integer
     }}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
 ```
--
-```
-POST/user/accessCode
-```
- - Request
-```
-{
-    "accessCode": String
-}
-```
-- Response
-```
-SUCCESS {"code": 200, "message": "Success", "isAdmin": Boolean}
-```
-```
-FAIL {"code": 500,"message":"FAIL"}
-```
+
 일정 추가
 -
 ```
