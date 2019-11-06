@@ -10,6 +10,7 @@ import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,18 +34,18 @@ public class UserController {
     private static Logger logger = LoggerFactory.getLogger("UserController");
 
     @RequestMapping(method = RequestMethod.POST, path = "/join")
-    public String joinRequest(@RequestBody Student student){
+    public ResponseEntity<String> joinRequest(@RequestBody Student student){
         logger.info("joinRequest");
         userService.join(student ,userRepository,calendarRepository);
-        return "OK";
+        return ResponseEntity.ok("OK");
     }
     @PostMapping(value = "/loginUser")
-    public UserInfo loginUserRequest(@RequestBody Student student){
-        return userService.loginUser(student, userRepository,loginUserRepository,adminRepository,loginUserRepository);
+    public ResponseEntity<UserInfo> loginUserRequest(@RequestBody Student student){
+        return ResponseEntity.ok(userService.loginUser(student, userRepository,loginUserRepository,adminRepository,loginUserRepository));
     }
     @GetMapping(value = "/logout")
-    public void logoutRequest(@RequestHeader Integer loginUserId){
+    public ResponseEntity<String> logoutRequest(@RequestHeader Integer loginUserId){
         certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
-        userService.logout(loginUserId,loginUserRepository);
+        return ResponseEntity.ok(userService.logout(loginUserId,loginUserRepository));
     }
 }
