@@ -36,7 +36,6 @@ public class TimeTableController {
     public ResponseEntity<List<TimeTable>> updateTimeTableRequest(@RequestHeader Integer loginUserId, @RequestBody List<TimeTable> timeTable){
         certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
         certifiedService.isAdmin(loginUserRepository.findById(loginUserId),adminRepository);
-
         return ResponseEntity.ok(timeTableService.updateTimeTable(timeTable,timeTableRepository));
     }
     @GetMapping(value = "/timeTable")
