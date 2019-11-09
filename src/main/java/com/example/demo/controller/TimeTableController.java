@@ -32,17 +32,16 @@ public class TimeTableController {
         this.certifiedService = new CertifiedService();
     }
 
-    @PostMapping(value = "/timeTable/updateTimeTable")
+    @PostMapping(value = "/timeTable")
     public ResponseEntity<List<TimeTable>> updateTimeTableRequest(@RequestHeader Integer loginUserId, @RequestBody List<TimeTable> timeTable){
         certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
         certifiedService.isAdmin(loginUserRepository.findById(loginUserId),adminRepository);
 
         return ResponseEntity.ok(timeTableService.updateTimeTable(timeTable,timeTableRepository));
     }
-    @GetMapping(value = "/timeTable/readAllTimeTable")
+    @GetMapping(value = "/timeTable")
     public ResponseEntity<List<TimeTable>> readAllTimeTableRequest(@RequestHeader Integer loginUserId){
         certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
         return ResponseEntity.ok(timeTableService.readAllTimeTable(timeTableRepository));
-
     }
 }
