@@ -76,7 +76,7 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 수정
 -
 ```
-PUT/calendar/updateSchedule/{scheduleId}
+PUT/calendar/{scheduleId}
 ```
  - Request
 ```
