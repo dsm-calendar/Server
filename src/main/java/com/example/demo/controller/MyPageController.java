@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Student;
+import com.example.demo.entity.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.CertifiedService;
 import com.example.demo.service.MyPageService;
@@ -14,8 +14,6 @@ public class MyPageController {
     private UserRepository userRepository;
     @Autowired
     private LoginUserRepository loginUserRepository;
-    @Autowired
-    private AdminRepository adminRepository;
     @Autowired
     private CalendarRepository calendarRepository;
     @Autowired
@@ -35,12 +33,12 @@ public class MyPageController {
 
     @GetMapping(value = "/myPage")
     public ResponseEntity<Student> myPageRequest(@RequestHeader Integer loginUserId){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
+        certifiedService.isLogin(loginUserId,loginUserRepository);
         return ResponseEntity.ok(userRepository.findById(loginUserRepository.findById(loginUserId).get().getUserId()).get());
     }
-    @PutMapping(value = "/myPage/updateMyIcon")
+    @PutMapping(value = "/myPage")
     public ResponseEntity<Student> updateMyPageRequest(@RequestHeader Integer loginUserId, @RequestBody Student student){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
+        certifiedService.isLogin(loginUserId,loginUserRepository);
         return ResponseEntity.ok(myPageService.updateIndex(student,userRepository,loginUserRepository.findById(loginUserId)));
     }
 }

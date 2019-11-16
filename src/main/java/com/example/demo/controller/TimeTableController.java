@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TimeTable;
-import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.LoginUserRepository;
 import com.example.demo.repository.TimeTableRepository;
 import com.example.demo.repository.UserRepository;
@@ -18,8 +17,6 @@ public class TimeTableController {
     @Autowired
     private LoginUserRepository loginUserRepository;
     @Autowired
-    private AdminRepository adminRepository;
-    @Autowired
     private TimeTableRepository timeTableRepository;
     @Autowired
     private UserRepository userRepository;
@@ -34,13 +31,15 @@ public class TimeTableController {
 
     @PostMapping(value = "/timeTable")
     public ResponseEntity<List<TimeTable>> updateTimeTableRequest(@RequestHeader Integer loginUserId, @RequestBody List<TimeTable> timeTable){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
-        certifiedService.isAdmin(loginUserRepository.findById(loginUserId),adminRepository);
+        certifiedService.isLogin(loginUserId,loginUserRepository);
+        certifiedService.isAdmin(loginUserRepository.findById(loginUserId),userRepository);
+
         return ResponseEntity.ok(timeTableService.updateTimeTable(timeTable,timeTableRepository));
     }
     @GetMapping(value = "/timeTable")
     public ResponseEntity<List<TimeTable>> readAllTimeTableRequest(@RequestHeader Integer loginUserId){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
+        certifiedService.isLogin(loginUserId,loginUserRepository);
         return ResponseEntity.ok(timeTableService.readAllTimeTable(timeTableRepository));
+
     }
 }

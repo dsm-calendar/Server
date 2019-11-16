@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.*;
-import com.example.demo.repository.AdminRepository;
+import com.example.demo.entity.Student;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.CalendarRepository;
 import com.example.demo.repository.LoginUserRepository;
 import com.example.demo.repository.UserRepository;
@@ -19,8 +19,6 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private LoginUserRepository loginUserRepository;
-    @Autowired
-    private AdminRepository adminRepository;
     @Autowired
     private CalendarRepository calendarRepository;
 
@@ -41,11 +39,11 @@ public class UserController {
     }
     @PostMapping(value = "/loginUser")
     public ResponseEntity<UserInfo> loginUserRequest(@RequestBody Student student){
-        return ResponseEntity.ok(userService.loginUser(student, userRepository,loginUserRepository,adminRepository,loginUserRepository));
+        return ResponseEntity.ok(userService.loginUser(student, userRepository,loginUserRepository,loginUserRepository));
     }
     @GetMapping(value = "/logout")
     public ResponseEntity<String> logoutRequest(@RequestHeader Integer loginUserId){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
+        certifiedService.isLogin(loginUserId,loginUserRepository);
         return ResponseEntity.ok(userService.logout(loginUserId,loginUserRepository));
     }
 }
