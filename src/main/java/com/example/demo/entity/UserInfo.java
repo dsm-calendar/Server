@@ -19,6 +19,7 @@ public class UserInfo {
         this.isAdmin = isAdmin;
     }
 
+
     public String getId() {
         return id;
     }

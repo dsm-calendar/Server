@@ -8,7 +8,7 @@ public class InRoom {
     List<RoomMember> roomMembers;
     Room room;
 
-    public InRoom(List<Schedule> schedules, List<RoomMember> roomMembers, Room room) {
+    public InRoom(List<Schedule> schedules, List<RoomMember> roomMembers,Room room) {
         this.schedules = schedules;
         this.roomMembers = roomMembers;
         this.room = room;

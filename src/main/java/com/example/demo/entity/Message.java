@@ -17,15 +17,17 @@ public class Message {
     Date sendDateNow;
     Integer roomId;
     Integer eventId;
+    String sendUserId;
     int type;
 
-    public Message(Boolean isHaveDialog, String toUserId, Date sendDateNow, Integer roomId, Integer eventId, int type) {
+    public Message(Boolean isHaveDialog, String toUserId, Date sendDateNow, Integer roomId, Integer eventId, int type, String sendUserId) {
         this.isHaveDialog = isHaveDialog;
         this.toUserId = toUserId;
         this.sendDateNow = sendDateNow;
         this.roomId = roomId;
         this.eventId = eventId;
         this.type = type;
+        this.sendUserId = sendUserId;
     }
 
     public Integer getRoomId() {

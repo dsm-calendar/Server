@@ -15,7 +15,7 @@ public class Student {
         int classOf;
         int iconIndex;
         Integer myCalendarId;
-
+        Boolean isAdmin;
     public Integer getMyCalendarId() {
         return myCalendarId;
     }
@@ -42,6 +42,14 @@ public class Student {
 
     public String getPw(){return this.pw;}
     public String getId(){return this.id;}
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
 
     public void setStudent(Student student) {
         this.id = student.getId();
