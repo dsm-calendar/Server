@@ -38,12 +38,10 @@ public class CertifiedService {
 
     public void isMessageUser(Integer loginUserId, LoginUserRepository loginUserRepository, MessageRepository messageRepository, Integer messageId) {
         //System.out.println(loginUserRepository.findById(loginUserId).get().getUserId());
-        System.out.println(messageId);
         if(messageRepository.findById(messageId).isEmpty()){
             throw new NotFoundException("Not found");
         }
-        System.out.println(messageRepository.findById(messageId).get().getToUserId());
-        if(!(messageRepository.findById(messageId).get().getToUserId().equals(loginUserRepository.findById(loginUserId).get().getUserId()))){
+        if(!messageRepository.findById(messageId).get().getToUserId().equals(loginUserRepository.findById(loginUserId).get().getUserId())){
             throw new NoCertifiedException("No Certified");
         }
     }
