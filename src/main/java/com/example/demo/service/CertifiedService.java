@@ -1,10 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Admin;
-import com.example.demo.entity.Calendar;
-import com.example.demo.entity.LoginUser;
-import com.example.demo.entity.RoomMember;
-import com.example.demo.exception.IsNotUserException;
+import com.example.demo.entity.*;
 import com.example.demo.exception.NoCertifiedException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.*;
@@ -13,9 +9,9 @@ import java.util.Optional;
 
 public class CertifiedService {
 
-    public void isAdmin(Optional<LoginUser> loginUser, AdminRepository adminRepository) {
-        Optional<Admin> admin = adminRepository.findById(loginUser.get().getUserId());
-        if(admin.isEmpty()){
+    public void isAdmin(Optional<LoginUser> loginUser, UserRepository userRepository) {
+        Optional<Student>student = userRepository.findById(loginUser.get().getUserId());
+        if(student.isEmpty()){
             throw new NoCertifiedException("No Certified");
         }
     }
@@ -58,13 +54,10 @@ public class CertifiedService {
         }
     }
 
-    public void isLogin(Integer loginUserId, LoginUserRepository loginUserRepository, UserRepository userRepository, AdminRepository adminRepository) {
+    public void isLogin(Integer loginUserId, LoginUserRepository loginUserRepository) {
         Optional<LoginUser> loginUser = loginUserRepository.findById(loginUserId);
-        if(loginUserId==null||loginUserRepository.findById(loginUserId).isEmpty()){
+        if(loginUserId==null||loginUser.isEmpty()){
             throw new NoCertifiedException("No Certified");
-        }
-        if(userRepository.findById(loginUser.get().getUserId()).isEmpty()||adminRepository.findById(loginUser.get().getUserId()).isEmpty()){
-            throw new IsNotUserException("is not User");
         }
     }
 

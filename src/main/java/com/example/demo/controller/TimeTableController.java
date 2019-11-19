@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TimeTable;
-import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.LoginUserRepository;
 import com.example.demo.repository.TimeTableRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.CertifiedService;
 import com.example.demo.service.TimeTableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +16,6 @@ import java.util.List;
 public class TimeTableController {
     @Autowired
     private LoginUserRepository loginUserRepository;
-    @Autowired
-    private AdminRepository adminRepository;
     @Autowired
     private TimeTableRepository timeTableRepository;
     @Autowired
@@ -31,17 +29,17 @@ public class TimeTableController {
         this.certifiedService = new CertifiedService();
     }
 
-    @PostMapping(value = "/timeTable/updateTimeTable")
-    public List<TimeTable> updateTimeTableRequest(@RequestHeader Integer loginUserId, @RequestBody List<TimeTable> timeTable){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
-        certifiedService.isAdmin(loginUserRepository.findById(loginUserId),adminRepository);
+    @PostMapping(value = "/timeTable")
+    public ResponseEntity<List<TimeTable>> updateTimeTableRequest(@RequestHeader Integer loginUserId, @RequestBody List<TimeTable> timeTable){
+        certifiedService.isLogin(loginUserId,loginUserRepository);
+        certifiedService.isAdmin(loginUserRepository.findById(loginUserId),userRepository);
 
-        return timeTableService.updateTimeTable(timeTable,timeTableRepository);
+        return ResponseEntity.ok(timeTableService.updateTimeTable(timeTable,timeTableRepository));
     }
-    @GetMapping(value = "/timeTable/readAllTimeTable")
-    public List<TimeTable> readAllTimeTableRequest(@RequestHeader Integer loginUserId){
-        certifiedService.isLogin(loginUserId,loginUserRepository,userRepository,adminRepository);
-        return timeTableService.readAllTimeTable(timeTableRepository);
+    @GetMapping(value = "/timeTable")
+    public ResponseEntity<List<TimeTable>> readAllTimeTableRequest(@RequestHeader Integer loginUserId){
+        certifiedService.isLogin(loginUserId,loginUserRepository);
+        return ResponseEntity.ok(timeTableService.readAllTimeTable(timeTableRepository));
 
     }
 }

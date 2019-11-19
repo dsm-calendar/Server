@@ -1,10 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.*;
-import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.NotPwException;
 import com.example.demo.exception.UserIsExistsException;
-import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.CalendarRepository;
 import com.example.demo.repository.LoginUserRepository;
 import com.example.demo.repository.UserRepository;
@@ -24,6 +22,7 @@ public class UserService {
         Calendar calendar = new Calendar("student");
         Calendar myCalendar = calendarRepository.save(calendar);
         student.setMyCalendarId(myCalendar.getCalendarId());
+        student.setAdmin(false);
 
         return userRepository.save(student);
     }
@@ -34,15 +33,10 @@ public class UserService {
         return "Success logout";
     }
 
-    public UserInfo loginUser(Student student, UserRepository userRepository, LoginUserRepository loginUserRepository, AdminRepository adminRepository, LoginUserRepository loginUserRepository1) {
+    public UserInfo loginUser(Student student, UserRepository userRepository, LoginUserRepository loginUserRepository, LoginUserRepository loginUserRepository1) {
         Optional<Student> u = userRepository.findById(student.getId());
         if(!u.isPresent()){
-            Optional<Admin> admin = adminRepository.findById(student.getId());
-            if(!admin.isPresent())
-                throw new NotFoundException("user not exists");
-            LoginUser loginUser = loginUserRepository.save(new LoginUser(admin.get().getId()));
-            UserInfo userInfo = new UserInfo(loginUser.getUserId(),0,0,0,loginUser.getLoginUserId(),true);
-            return userInfo;
+            throw new UserIsExistsException("user is exists");
         }
 
         if(!u.get().getPw().equals(student.getPw())){
@@ -50,7 +44,7 @@ public class UserService {
             throw  new NotPwException("it is not pw");
         }
         LoginUser loginUser = loginUserRepository.save(new LoginUser(u.get().getId()));
-        UserInfo userInfo = new UserInfo(loginUser.getUserId(),u.get().getClassOf(),u.get().getIconIndex(),u.get().getMyCalendarId(),loginUser.getLoginUserId(),false);
+        UserInfo userInfo = new UserInfo(loginUser.getUserId(),u.get().getClassOf(),u.get().getIconIndex(),u.get().getMyCalendarId(),loginUser.getLoginUserId(),u.get().getAdmin());
         return userInfo;
     }
 

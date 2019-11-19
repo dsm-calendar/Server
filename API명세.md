@@ -3,7 +3,7 @@
 회원가입
 -
 ```
-POST/auth/resister
+POST/join
 ```
 - STUDENT
     - Request
@@ -11,7 +11,7 @@ POST/auth/resister
     {
         "id": String,
         "pw": String,
-        "classOf": Number
+        "classOf": Int
     }
     ```
     - Response
@@ -24,7 +24,7 @@ POST/auth/resister
 로그인
 -
 ```
-POST/auth/login
+POST/loginUser
 ```
  - Request
 ```
@@ -36,51 +36,38 @@ POST/auth/login
 - Response
 ```
 SUCCESS {"code": 200, {
-    id: String,
-    userNum: INT
+     classOf: Int,
+     iconIndex: Int,
+     id: String,
+     loginUserId: Integer,
+     myCalendarId: Integer
     }}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
 ```
--
-```
-POST/user/accessCode
-```
- - Request
-```
-{
-    "accessCode": String
-}
-```
-- Response
-```
-SUCCESS {"code": 200, "message": "Success", "isAdmin": Boolean}
-```
-```
-FAIL {"code": 500,"message":"FAIL"}
-```
+
 일정 추가
 -
 ```
-POST/calendar/addSchedule/{calendarId}
+POST/calendar/{calendarId}
 ```
  - Request
 ```
 {
-    "title": String,
-    "information": String,
-    "startDate": String,
-    "endDate": String
+    scheduleContent: String,
+    scheduleTitle: String,
+    startDate: String,
+    endDate: String
 }
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "schedules":[{
-    "scheduleId": Int,
-    "title": String,
-    "startDate": String,
-    "endDate": String
+SUCCESS {"code": 200, "message": "Success", [{
+    scheduleContent: String,
+    scheduleTitle: String,
+    startDate: String,
+    endDate: String
 }]}
 ```
 ```
@@ -89,34 +76,33 @@ FAIL {"code": 500,"message":"FAIL"}
 일정 수정
 -
 ```
-PUT/calendar/updateSchedule/{calendarId}
+PUT/calendar/{scheduleId}
 ```
  - Request
 ```
 {
-    "title": String,
-    "information": String,
-    "startDate": String,
-    "endDate": String
+    scheduleContent: String,
+    scheduleTitle: String,
+    startDate: String,
+    endDate: String
 }
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "schedule":{
-    "calendarId": Int
-    "title": String,
-    "information": String,
-    "startDate": String,
-    "endDate": String
-}}
+SUCCESS {"code": 200, "message": "Success", [{
+    scheduleContent: String,
+    scheduleTitle: String,
+    startDate: String,
+    endDate: String
+}]}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
 ```
-일정 보기
+내 일정 보기
 -
 ```
-GET/calendar/{calendarId}
+GET/myCalendar
 ```
  - Request
 ```
@@ -126,11 +112,11 @@ GET/calendar/{calendarId}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "schedules":[{
-    "scheduleId":Int,
-    "title": String,
-    "startDate": String,
-    "endDate": String
+SUCCESS {"code": 200, "message": "Success", [{
+    scheduleContent: String,
+    scheduleTitle: String,
+    startDate: String,
+    endDate: String
 }]}
 ```
 ```
@@ -147,12 +133,12 @@ GET/calendar/{scheduleId}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "schedule":{
-    "title": String,
-    "information": String,
-    "startDate": String,
-    "endDate": String
-}}
+SUCCESS {"code": 200, "message": "Success", [{
+    scheduleContent: String,
+    scheduleTitle: String,
+    startDate: String,
+    endDate: String
+}]}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -170,7 +156,7 @@ DELETE/calendar/deleteSchedule/{scheduleId}
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success"}
+SUCCESS {"code": 200, "message": "Ok"}
 ```
 ```
 FAIL {"code": 500,"message":"FAIL"}
@@ -178,15 +164,15 @@ FAIL {"code": 500,"message":"FAIL"}
 공지사항 추가
 -
 ```
-POST/notice/addNotice
+POST/notice/createNotice
 ```
  - Request
 ```
 {
-    "title": String,
-    "content": String,
-    "startDate": String,
-    "endDate": String
+    "endDate": "string",
+    "noticeContent": "string",
+    "noticeTitle": "string",
+    "startDate": "string"
 }
 ```
 - Response
@@ -214,11 +200,11 @@ POST/notice/
 ```
 - Response
 ```
-SUCCESS {"code": 200, "message": "Success", "notices":[{
-    "noticeId": Int,
-    "title": String,
-    "startDate": String,
-    "endDate": String
+SUCCESS {"code": 200, "message": "Success", [{
+    endDate: "string",
+    noticeContent: "string",
+    noticeTitle: "string",
+    startDate: "string"
 }]}
 ```
 ```
