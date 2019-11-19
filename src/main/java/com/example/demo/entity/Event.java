@@ -17,6 +17,14 @@ public class Event {
     String endDate;
     Boolean eventStatus;
 
+    public Event(String eventPoster, String eventDetail, String startDate, String endDate, Boolean eventStatus) {
+        this.eventPoster = eventPoster;
+        this.eventDetail = eventDetail;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.eventStatus = eventStatus;
+    }
+
     public void setEventStatus(Boolean eventStatus) {
         this.eventStatus = eventStatus;
     }
@@ -35,6 +43,10 @@ public class Event {
 
     public String getStartDate() {
         return startDate;
+    }
+
+    public Boolean getEventStatus() {
+        return eventStatus;
     }
 
     public String getEndDate() {
