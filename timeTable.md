@@ -37,6 +37,7 @@ GET/timetable/
  - Request
 ```
 {
+
 }
 ```
 - Response
