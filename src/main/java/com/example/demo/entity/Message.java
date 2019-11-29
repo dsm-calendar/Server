@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 public class Message {
@@ -14,13 +13,13 @@ public class Message {
 
     Boolean isHaveDialog;
     String toUserId;
-    Date sendDateNow;
+    String sendDateNow;
     Integer roomId;
     Integer eventId;
     String sendUserId;
     int type;
 
-    public Message(Boolean isHaveDialog, String toUserId, Date sendDateNow, Integer roomId, Integer eventId, int type, String sendUserId) {
+    public Message(Boolean isHaveDialog, String toUserId, String sendDateNow, Integer roomId, Integer eventId, int type, String sendUserId) {
         this.isHaveDialog = isHaveDialog;
         this.toUserId = toUserId;
         this.sendDateNow = sendDateNow;
@@ -28,6 +27,10 @@ public class Message {
         this.eventId = eventId;
         this.type = type;
         this.sendUserId = sendUserId;
+    }
+
+    public String getSendUserId() {
+        return sendUserId;
     }
 
     public Integer getRoomId() {
@@ -38,7 +41,7 @@ public class Message {
         return isHaveDialog;
     }
 
-    public Date getSendDateNow() {
+    public String getSendDateNow() {
         return sendDateNow;
     }
 

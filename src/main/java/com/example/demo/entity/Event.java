@@ -10,7 +10,6 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer eventId;
-
     String eventPoster;
     String eventDetail;
     String startDate;
@@ -19,6 +18,27 @@ public class Event {
 
     public void setEventStatus(Boolean eventStatus) {
         this.eventStatus = eventStatus;
+    }
+
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
+    }
+
+
+    public void setEventPoster(String eventPoster) {
+        this.eventPoster = eventPoster;
+    }
+
+    public void setEventDetail(String eventDetail) {
+        this.eventDetail = eventDetail;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public Integer getEventId() {
@@ -41,6 +61,16 @@ public class Event {
         return endDate;
     }
 
+    public Boolean getEventStatus() {
+        return eventStatus;
+    }
+
     public Event() {
+    }
+
+    public Event(String eventDetail, String startDate, String endDate) {
+        this.eventDetail = eventDetail;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 }

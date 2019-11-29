@@ -5,12 +5,10 @@ import java.util.List;
 public class InRoom {
 
     List<Schedule> schedules;
-    List<RoomMember> roomMembers;
     Room room;
 
-    public InRoom(List<Schedule> schedules, List<RoomMember> roomMembers,Room room) {
+    public InRoom(List<Schedule> schedules,Room room) {
         this.schedules = schedules;
-        this.roomMembers = roomMembers;
         this.room = room;
     }
 
@@ -21,11 +19,8 @@ public class InRoom {
         return schedules;
     }
 
-    public List<RoomMember> getRoomMembers() {
-        return roomMembers;
-    }
-
     public Room getRoom() {
         return room;
     }
+
 }

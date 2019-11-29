@@ -40,6 +40,18 @@ public class Room {
         this.roomTitle = roomTitle;
     }
 
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setIconIndex(int iconIndex) {
+        this.iconIndex = iconIndex;
+    }
+
+    public void setRoomTitle(String roomTitle) {
+        this.roomTitle = roomTitle;
+    }
+
     public Room() {
     }
 }
