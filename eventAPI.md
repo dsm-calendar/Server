@@ -1,7 +1,7 @@
 이벤트 요청
 -
 ```
-POST/event
+POST/event/request
 ```
  - Request
 ```
