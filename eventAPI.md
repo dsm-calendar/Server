@@ -28,7 +28,7 @@ FAIL {"code": 500,"message":"FAIL"}
 이벤트 올리기
 -
 ```
-POST/event/{eventId}
+PUT/event/{eventId}
 ```
  - Request
 ```
