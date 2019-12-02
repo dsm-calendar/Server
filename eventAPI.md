@@ -12,7 +12,7 @@ POST/event/request
 - body(form-data)
 {
     "eventDetail": String,
-    "eventPoster": String,
+    "eventPoster": File,
     "startDate": String,
     "endDate": String
 }
