@@ -40,9 +40,13 @@ public class CalendarController {
 
         return ResponseEntity.ok(calendarService.readAllMyCalendar(loginUserRepository.findById(loginUserId),userRepository,calendarRepository,scheduleRepository));
     }
-
+    @GetMapping(value = "/createSchool")
+    public ResponseEntity<String> createSchoolCalendar(){
+        calendarRepository.save(new Calendar("school"));
+        return ResponseEntity.ok("ok");
+    }
     @GetMapping(value = "/schoolCalendar")
-    public ResponseEntity<List<Schedule>> readAllSchoolCalendarRequest(@RequestHeader Integer loginUserId){
+    public ResponseEntity<InSchoolCalendar> readAllSchoolCalendarRequest(@RequestHeader Integer loginUserId){
         certifiedService.isLogin(loginUserId,loginUserRepository);
         return ResponseEntity.ok(calendarService.readAllSchoolCalendar(calendarRepository,scheduleRepository));
     }

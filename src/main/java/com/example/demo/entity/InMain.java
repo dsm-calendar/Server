@@ -39,15 +39,14 @@ public class InMain {
         this.timeTables = timeTables;
     }
 
-    public InMain() {
+    public List<Schedule> getSchedules() {
+        return schedules;
     }
 
-    @Override
-    public String toString() {
-        return "InMain{" +
-                "eventList=" + eventList +
-                ", notices=" + notices +
-                ", timeTables=" + timeTables +
-                '}';
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
+    public InMain() {
     }
 }

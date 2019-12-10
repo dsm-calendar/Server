@@ -10,7 +10,7 @@ public class MyPageService {
 
     public Student updateIndex(Student student, UserRepository userRepository, Optional<LoginUser> loginUser) {
         Student user = userRepository.findById(loginUser.get().getUserId()).get();
-        user.setStudent(student);
+        user.setIconIndex(student.getIconIndex());
         return userRepository.save(user);
     }
 }

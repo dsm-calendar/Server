@@ -13,4 +13,6 @@ public interface RoomMemberRepository extends JpaRepository<RoomMember, Integer>
     List<RoomMember> findByUserId(String userId);
 
     List<RoomMember> findByRoomId(Integer roomId);
+
+    RoomMember findByUserIdAndRoomId(String roomMemberId, Integer roomId);
 }

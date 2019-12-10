@@ -42,4 +42,11 @@ public class TimeTableController {
         return ResponseEntity.ok(timeTableService.readAllTimeTable(timeTableRepository));
 
     }
+
+//    @GetMapping("/timeTable")
+//    public ResponseEntity readAllTimeTableRequest(@RequestHeader Integer loginUserId){
+//        certifiedService.isLogin(loginUserId,loginUserRepository);
+//        return ResponseEntity.ok(timeTableService.readAllTimeTable(timeTableRepository));
+//    }
+    // 이래도 돼지롱 돼지
 }

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.*;
+import com.example.demo.entity.Student;
 import com.example.demo.repository.*;
 import com.example.demo.service.CertifiedService;
 import com.example.demo.service.MyPageService;

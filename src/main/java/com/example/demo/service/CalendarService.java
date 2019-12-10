@@ -15,9 +15,12 @@ public class CalendarService {
         return scheduleRepository.findByCalendarId(calendar.get().getCalendarId());
     }
 
-    public List<Schedule> readAllSchoolCalendar(CalendarRepository calendarRepository, ScheduleRepository scheduleRepository) {
+    public InSchoolCalendar readAllSchoolCalendar(CalendarRepository calendarRepository, ScheduleRepository scheduleRepository) {
         Optional<Calendar> calendar = calendarRepository.findByCategory("school");
-        return scheduleRepository.findByCalendarId(calendar.get().getCalendarId());
+        InSchoolCalendar inSchoolCalendar = new InSchoolCalendar();
+        inSchoolCalendar.setSchoolCalendarId(calendar.get().getCalendarId());
+        inSchoolCalendar.setScheduleList(scheduleRepository.findByCalendarId(calendar.get().getCalendarId()));
+        return inSchoolCalendar;
     }
 
     public List<Schedule> deleteSchedule(Integer scheduleId, ScheduleRepository scheduleRepository) {

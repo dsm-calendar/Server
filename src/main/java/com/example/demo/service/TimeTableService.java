@@ -10,8 +10,13 @@ public class TimeTableService {
     public List<TimeTable> updateTimeTable(List<TimeTable> newTimeTable, TimeTableRepository timeTableRepository) {
         for(TimeTable timeTable : newTimeTable){
             Optional<TimeTable> table = timeTableRepository.findById(timeTable.getTimeTableIndex());
-            table.get().setSubject(timeTable.getSubject());
-            table.get().setTeacher(timeTable.getTeacher());
+            if(table.isEmpty()){
+                timeTableRepository.save(timeTable);
+            }
+            else{
+                table.get().setSubject(timeTable.getSubject());
+                table.get().setTeacher(timeTable.getTeacher());
+            }
         }
         return timeTableRepository.findAll();
     }
