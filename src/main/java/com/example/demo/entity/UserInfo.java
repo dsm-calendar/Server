@@ -39,4 +39,20 @@ public class UserInfo {
     public Integer getLoginUserId() {
         return loginUserId;
     }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setMyCalendarId(Integer myCalendarId) {
+        this.myCalendarId = myCalendarId;
+    }
+
+    public void setLoginUserId(Integer loginUserId) {
+        this.loginUserId = loginUserId;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
 }

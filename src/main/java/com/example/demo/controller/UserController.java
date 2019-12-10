@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Calendar;
 import com.example.demo.entity.Student;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.CalendarRepository;
@@ -36,6 +37,15 @@ public class UserController {
         logger.info("joinRequest");
         userService.join(student ,userRepository,calendarRepository);
         return ResponseEntity.ok("OK");
+    }
+    @PostMapping(value = "/admin")
+    public ResponseEntity<String> createAdmin(@RequestBody Student student){
+        Calendar calendar = calendarRepository.save(new Calendar("student"));
+        student.setMyCalendarId(calendar.getCalendarId());
+        student.setClassOf(1100);
+        student.setAdmin(true);
+        userRepository.save(student);
+        return ResponseEntity.ok("ok");
     }
     @PostMapping(value = "/loginUser")
     public ResponseEntity<UserInfo> loginUserRequest(@RequestBody Student student){

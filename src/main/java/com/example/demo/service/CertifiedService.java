@@ -14,6 +14,9 @@ public class CertifiedService {
         if(student.isEmpty()){
             throw new NoCertifiedException("No Certified");
         }
+        if(!student.get().getAdmin()){
+            throw new NoCertifiedException("No Certified");
+        }
     }
 
     public Optional<RoomMember> isMember(Optional<LoginUser> loginUser, Integer calendarId, RoomMemberRepository roomMemberRepository, RoomRepository roomRepository) {
@@ -37,12 +40,9 @@ public class CertifiedService {
     }
 
     public void isMessageUser(Integer loginUserId, LoginUserRepository loginUserRepository, MessageRepository messageRepository, Integer messageId) {
-        //System.out.println(loginUserRepository.findById(loginUserId).get().getUserId());
-        System.out.println(messageId);
         if(messageRepository.findById(messageId).isEmpty()){
             throw new NotFoundException("Not found");
         }
-        System.out.println(messageRepository.findById(messageId).get().getToUserId());
         if(!(messageRepository.findById(messageId).get().getToUserId().equals(loginUserRepository.findById(loginUserId).get().getUserId()))){
             throw new NoCertifiedException("No Certified");
         }

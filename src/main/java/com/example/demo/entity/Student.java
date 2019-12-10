@@ -24,6 +24,10 @@ public class Student {
         this.myCalendarId = myCalendarId;
     }
 
+    public void setIconIndex(int iconIndex) {
+        this.iconIndex = iconIndex;
+    }
+
     public int getIconIndex() {
         return iconIndex;
     }
@@ -38,6 +42,10 @@ public class Student {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setClassOf(int classOf) {
+        this.classOf = classOf;
     }
 
     public String getPw(){return this.pw;}

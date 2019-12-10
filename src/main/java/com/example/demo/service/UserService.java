@@ -36,7 +36,7 @@ public class UserService {
     public UserInfo loginUser(Student student, UserRepository userRepository, LoginUserRepository loginUserRepository, LoginUserRepository loginUserRepository1) {
         Optional<Student> u = userRepository.findById(student.getId());
         if(!u.isPresent()){
-            throw new UserIsExistsException("user is exists");
+            throw new UserIsExistsException("user not is exists");
         }
 
         if(!u.get().getPw().equals(student.getPw())){
